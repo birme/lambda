@@ -18,6 +18,7 @@ const apiHandler: FastifyPluginCallback = (fastify, opts, next) => {
       const handler = require('../runner/index').handler;
       const result: Response = await handler({
         body: req.body,
+        query: req.query,
         headers: req.headers,
         httpMethod: req.method
       });
