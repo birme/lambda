@@ -8,6 +8,7 @@ import cors from '@fastify/cors';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import apiUpload from './api_upload';
+import apiHandler from './api_handler';
 
 const HealthCheckResponse = Type.Object({
   message: Type.String()
@@ -53,6 +54,7 @@ export default () => {
   });
   api.register(healthcheck);
   api.register(apiUpload);
+  api.register(apiHandler);
 
   return api;
 };
