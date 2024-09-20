@@ -3,6 +3,7 @@ import fs from 'fs';
 import util from 'util';
 import { pipeline } from 'stream';
 import multipart from '@fastify/multipart';
+import { spawnSync } from 'child_process';
 
 const pump = util.promisify(pipeline);
 
@@ -17,6 +18,7 @@ const apiUpload: FastifyPluginCallback = (fastify, opts, next) => {
             part.file,
             fs.createWriteStream(`./runner/${part.filename}`)
           );
+          spawnSync('unzip', [`./runner/${part.filename}`, '-d', './runner']);
         } else {
           reply.code(400).send({ message: 'Only zip files are allowed' });
           return;
