@@ -18,7 +18,7 @@ const apiUpload: FastifyPluginCallback = (fastify, opts, next) => {
             part.file,
             fs.createWriteStream(`./runner/${part.filename}`)
           );
-          spawnSync('unzip', [`./runner/${part.filename}`, '-d', './runner']);
+          spawnSync('unzip', ['-o', `./runner/${part.filename}`, '-d', './runner']);
         } else {
           reply.code(400).send({ message: 'Only zip files are allowed' });
           return;
